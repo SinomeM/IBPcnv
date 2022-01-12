@@ -6,7 +6,7 @@ Scripts to run the PennCNV pipeline using the SLURM job scheduler.
 
 1. `01_select_SNPs.sh`, select SNPs based on the MAF and HWE
 1. `02_preprocess.R`, divide the cohort into batches. Create the `snppos.txt` file.
-2. `03_launch_pipeline.sh`, launches the pipeline in each wave, calling `per_wave.sh`.
+2. `03_penncnv_pipeline.sh`, launches the pipeline in each wave, calling `per_wave.sh`.
    Also create the GC content file.
 3. `03_1_per_wave.sh`, also creates the PFB file for each wave.
 4. `03_2_cnv_calling.sh`, performs the actual jobs submission.
@@ -17,5 +17,8 @@ Scripts to run the PennCNV pipeline using the SLURM job scheduler.
 If the intensity files are in the "complete" format, meaning they contain
 a lot of columns (e.g. also "X" and "Y") and, more importantly, a multi-line
 header, they need to be preprocessed in order for PennCNV to accept them.   
-`00_fix_int_files.sh` can be used to run the `split_illumina_report.pl` PennCNV
+`misc/fix_int_files.sh` can be used to run the `split_illumina_report.pl` PennCNV
 script using SLURM.
+
+The script `misc/create_gcmodel.sh` can be used to covert the gc5 file from
+genome browser into the format required by PennCNV.

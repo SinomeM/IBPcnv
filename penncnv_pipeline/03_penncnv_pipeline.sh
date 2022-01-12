@@ -3,7 +3,7 @@
 # Variables
 wkdir=${1}
 scripts=${2} # the location of IBPcnv repo clone
-mv=${3}
+batches=${3}
 hg=${4}
 s_acc=${5}
 
@@ -20,7 +20,7 @@ srun --account=$s_acc -c2 --mem=50g --time 00:30:00 \
   $simg cal_gc_snp.pl $gccont $snpposfile --output $gcmodel
 
 # Main loop #
-for wv in {1..${mv}}; do
+for wv in {1..${batches}}; do
 
   echo -e "\nLaunching the calling pipeline in batch n${wv}\n"
   # batch number and SLURM account are passed to the script

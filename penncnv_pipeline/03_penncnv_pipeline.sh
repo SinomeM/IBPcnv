@@ -2,7 +2,7 @@
 
 # Variables
 wkdir=${1}
-scripts=${2}
+scripts=${2} # the location of IBPcnv repo clone
 mv=${3}
 hg=${4}
 s_acc=${5}

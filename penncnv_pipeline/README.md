@@ -17,8 +17,8 @@ Scripts to run the PennCNV pipeline using the SLURM job scheduler.
 If the intensity files are in the "complete" format, meaning they contain
 a lot of columns (e.g. also "X" and "Y") and, more importantly, a multi-line
 header, they need to be preprocessed in order for PennCNV to accept them.   
-`misc/fix_int_files.sh` can be used to run the `split_illumina_report.pl` PennCNV
+`../misc/fix_int_files.sh` can be used to run the `split_illumina_report.pl` PennCNV
 script using SLURM.
 
-The script `misc/create_gcmodel.sh` can be used to covert the gc5 file from
+The script `../misc/create_gcmodel.sh` can be used to covert the gc5 file from
 genome browser into the format required by PennCNV.

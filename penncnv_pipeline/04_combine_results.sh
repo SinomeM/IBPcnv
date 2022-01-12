@@ -31,7 +31,7 @@ done
 
 echo -e "\nCombining QC measure in Autosomes"
 mkdir -p $res
-rm ${res}/autosome.qc
+# rm ${res}/autosome.qc
 touch ${res}/autosome.qc
 
 for i in $( ls ${wkdir}/logs | grep autosome ); do
@@ -51,7 +51,7 @@ done
 cat ${wkdir}/logs/${i} | grep 'quality summary' | \
   awk '{print $5,$6,$7,$8,$9,$10,$11,$12,$13,$14}' | \
   sed 's/.split://g' | sed 's/=/ /g' | \
-  awk '{print "sample",$2,$4,$6,$8,$10,$12,$14,$16,$18,$20,"wave"}' | \
+  awk '{print "sample",$2,$4,$6,$8,$10,$12,$14,$16,$18,$20,"batch"}' | \
   head -1 > ${res}/header.qc
 
 cat ${res}/autosome.qc | cat ${res}/header.qc - > ${res}/tmp.qc
@@ -63,9 +63,9 @@ rm ${res}/header.qc
 # Combine CNV calls from all chunks #
 
 echo -e "\nCombining CNV calls in Autosomes"
-rm ${res}/ipsych2012_autosome.cnv
+# rm ${res}/autosome.cnv
 
-echo "chr start stop sample numsnp length type conf wave" > ${res}/ipsych2012_autosome.cnv
+echo "chr start stop sample numsnp length type conf batch" > ${res}/autosome.cnv
 
 for i in $( ls ${wkdir}/filtered_res | grep -v chrX ); do
 
@@ -75,7 +75,7 @@ for i in $( ls ${wkdir}/filtered_res | grep -v chrX ); do
     sed 's/:/ /g' | sed 's/-/ /g' |  sed 's/,//g' | \
     sed 's/numsnp=//g' | sed 's/length=//g' | sed 's/conf=//g' | \
     sed 's/.split//g' | sed 's/=/ /g' | awk '{print$1,$2,$3,$8,$4,$5,$7,$9}' | \
-    sed "s/$/ ${wv}/" | cat ${res}/ipsych2012_autosome.cnv - > ${res}/tmp.cnv
-  mv ${res}/tmp.cnv ${res}/ipsych2012_autosome.cnv
+    sed "s/$/ ${wv}/" | cat ${res}/autosome.cnv - > ${res}/tmp.cnv
+  mv ${res}/tmp.cnv ${res}/autosome.cnv
 
 done

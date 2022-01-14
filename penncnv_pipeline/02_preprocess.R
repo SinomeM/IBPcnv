@@ -9,29 +9,31 @@ args <- commandArgs(trailingOnly=TRUE)
 slistp <- paste0(args[1], "/samples_list.txt")
 if (!file.exists(slistp)) error("Samples list file not found")
 
-slist <- fread(args[1])
-if (!all(c("sample_ID", "file_path") %in% colnames(slist)))
-  error("Wrong columns in samples list file")
+if (args[2] == 1) {
+  slist <- fread(args[1])
+  if (!all(c("sample_ID", "file_path") %in% colnames(slist)))
+    error("Wrong columns in samples list file")
 
-if (any(duplicated(slist[, sample_ID]))) error("Duplicated samples ID!")
+  if (any(duplicated(slist[, sample_ID]))) error("Duplicated samples ID!")
 
-# test 25% random files
-if (!all(file.exists(sample(slist[, file_path], nrow(slist)*0.25))))
-  error("Some intensity files are missing!")
+  # test 25% random files
+  if (!all(file.exists(sample(slist[, file_path], nrow(slist)*0.25))))
+    error("Some intensity files are missing!")
 
-# test 100 random files format
-for (f in sample(slist[, file_path], 100)) {
-  if!(file.exists(f))
-    error(paste0("Intensity file missing! File: ", f))
-  # read only the first 20 lines
-  tmp <- fread(paste0("head ", f, " -n20"), skip = "Position")
-  # if some lines are missing they were skipped by fread()
-  if (nrow(tmp) < 19)
-    error(paste0("Intensity file in the wrong format. Long header not removed? File: ", f))
-  # check is 'Sample ID' column is present, if yes check content
-  if (`Sample ID` %in% colnames(tmp)) {
-    tmp <- fread(f, select = "Sample ID")[, `Sample ID`]
-    if (!all(tmp == tmp[1])) error(paste0("Multiple samples per intensity file! File: ", f))
+  # test 100 random files format
+  for (f in sample(slist[, file_path], 100)) {
+    if!(file.exists(f))
+      error(paste0("Intensity file missing! File: ", f))
+    # read only the first 20 lines
+    tmp <- fread(paste0("head ", f, " -n20"), skip = "Position")
+    # if some lines are missing they were skipped by fread()
+    if (nrow(tmp) < 19)
+      error(paste0("Intensity file in the wrong format. Long header not removed? File: ", f))
+    # check is 'Sample ID' column is present, if yes check content
+    if (`Sample ID` %in% colnames(tmp)) {
+      tmp <- fread(f, select = "Sample ID")[, `Sample ID`]
+      if (!all(tmp == tmp[1])) error(paste0("Multiple samples per intensity file! File: ", f))
+    }
   }
 }
 
@@ -49,6 +51,10 @@ if (!"batch" %in% colnames(slist)) {
 
   slist[, batch := batches]
 }
+
+if ("batch" %in% colnames(slist))
+  if (!all(is.integer(slist[, batch])) | is.na(is.integer(slist[, batch])))
+    error("Batch column is in the wrong format!")
 
 # overwrite samples list and write individual batches files
 fwrite(slist, args[1], sep = "\t")

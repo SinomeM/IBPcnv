@@ -1,4 +1,8 @@
 
+# CHANGE THIS if batches should be larger or smaller #
+bs <- 2000
+
+
 args <- commandArgs(trailingOnly=TRUE)
 
 # read samples list
@@ -34,11 +38,10 @@ for (f in sample(slist[, file_path], 100)) {
 # check if batches are included or create them
 if (!"batch" %in% colnames(slist)) {
   n <- nrow(slist)
-  bs <- 2000
   nb <- n %/% bs
 
-  # if the last batch would be too small decrease by one
-  if(n %% bs > 0.75 * bs) bs <- bs - 1
+  # if the last batch would be too small decrease by one number of batches
+  if(n %% bs > 0.75 * bs) nb <- nb - 1
 
   # because in any case all batches will have same number of samples (max difference is 1)
   tmp <- rep(1:bs, length.out = n)

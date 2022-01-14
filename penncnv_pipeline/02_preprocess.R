@@ -35,10 +35,12 @@ for (f in sample(slist[, file_path], 100)) {
 if (!"batch" %in% colnames(slist)) {
   n <- nrow(slist)
   bs <- 2000
-  nb <- n%/%bs
-  # if the last batch would be too small find a new batch size
-  if (n%%bs > 0.75*bs)
-    while(n%%bs > 0.75*bs) bs <- bs - 100
+  nb <- n %/% bs
+
+  # if the last batch would be too small decrease by one
+  if(n %% bs > 0.75 * bs) bs <- bs - 1
+
+  # because in any case all batches will have same number of samples (max difference is 1)
   tmp <- rep(1:bs, length.out = n)
   batches <- sample(tmp)
 
@@ -46,5 +48,11 @@ if (!"batch" %in% colnames(slist)) {
 }
 
 # overwrite samples list and write individual batches files
+fwrite(slist, args[1], sep = "\t")
 
-# [...]
+lf <- paste0(args[1], "/listfile")
+dir.create(lf)
+
+for (i in unique(slist[, batch]))
+  fwrite(slist[batch := i, .(file_path)], paste0(lf, "/batch", i,".txt"), col.names = F)
+

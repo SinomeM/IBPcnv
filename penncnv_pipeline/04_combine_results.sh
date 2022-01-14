@@ -51,7 +51,7 @@ done
 cat ${wkdir}/logs/${i} | grep 'quality summary' | \
   awk '{print $5,$6,$7,$8,$9,$10,$11,$12,$13,$14}' | \
   sed 's/.split://g' | sed 's/=/ /g' | \
-  awk '{print "sample",$2,$4,$6,$8,$10,$12,$14,$16,$18,$20,"batch"}' | \
+  awk '{print "sample_ID",$2,$4,$6,$8,$10,$12,$14,$16,$18,$20,"batch"}' | \
   head -1 > ${res}/header.qc
 
 cat ${res}/autosome.qc | cat ${res}/header.qc - > ${res}/tmp.qc
@@ -65,7 +65,7 @@ rm ${res}/header.qc
 echo -e "\nCombining CNV calls in Autosomes"
 # rm ${res}/autosome.cnv
 
-echo "chr start stop sample numsnp length type conf batch" > ${res}/autosome.cnv
+echo "chr start stop sample_ID numsnp length type conf batch" > ${res}/autosome.cnv
 
 for i in $( ls ${wkdir}/filtered_res | grep -v chrX ); do
 
@@ -79,3 +79,5 @@ for i in $( ls ${wkdir}/filtered_res | grep -v chrX ); do
   mv ${res}/tmp.cnv ${res}/autosome.cnv
 
 done
+
+

@@ -4,8 +4,8 @@ Scripts to run the PennCNV pipeline using the SLURM job scheduler.
 
 ### Steps
 
-1. `01_select_SNPs.sh`, select SNPs based on the MAF and HWE
-1. `02_preprocess.R`, divide the cohort into batches. Create the `snppos.txt` file.
+1. `01_preprocess.R`, divide the cohort into batches. Create the `snppos.txt` file.
+1. `02_select_SNPs.sh`, select SNPs based on the MAF and HWE
 2. `03_penncnv_pipeline.sh`, launches the pipeline in each wave, calling `per_wave.sh`.
    Also create the GC content file.
 3. `03_1_per_wave.sh`, also creates the PFB file for each wave.

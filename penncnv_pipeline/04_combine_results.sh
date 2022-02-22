@@ -9,6 +9,7 @@
 wkdir=${1}
 scripts=${2} # the location of IBPcnv repo clone
 s_acc=${3}
+mg=${4}
 
 simg="singularity exec ${wkdir}/ibpcnv.simg"
 res=$wkdir/results
@@ -21,7 +22,7 @@ mkdir -p $wkdir/filtered_res
 
 for i in $( ls ${wkdir}/calling_res ); do
 
-  $simg clean_cnv.pl --fraction 0.2 --bp --signalfile $wkdir/snppos.txt combineseg ${wkdir}/calling_res/$i > ${wkdir}/clean_res/$i
+  $simg clean_cnv.pl --fraction $mg --bp --signalfile $wkdir/snppos.txt combineseg ${wkdir}/calling_res/$i > ${wkdir}/clean_res/$i
 
 done
 

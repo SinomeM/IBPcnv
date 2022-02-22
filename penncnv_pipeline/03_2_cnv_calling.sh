@@ -5,6 +5,10 @@
 #SBATCH -c 1
 #SBATCH --time 15:00:00
 
+# Settings
+min_snp=5
+min_bps=1000
+
 # Variables
 wkdir=${1}
 scripts=${2}
@@ -18,10 +22,6 @@ gcmodel=${wkdir}/gcmodel.txt
 simg="singularity exec ${wkdir}/ibpcnv.simg"
 
 hmm=${scripts}/lib/hhall.hmm
-
-# Settings
-min_snp=5
-min_bps=1000
 
 output=${wkdir}/calling_res/
 log=${wkdir}/logs

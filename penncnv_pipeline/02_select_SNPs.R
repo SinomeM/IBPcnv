@@ -14,17 +14,17 @@ library(VariantAnnotation); library(data.table)
 slistp <- paste0 (args[1], "/samples_list.txt")
 tmp <- fread (slistp[1, file_path], skip = "Position")[, .(`SNP Name`, chr, Position)]
 
-# read VCF
+# Read VCF
 fl <- ("hg19_snp_list.vfc.gz")
 message ("Loading SNPS info into R")
 vcf <- rowRanges(readVcf(fl, "hg19"))
-vcf <- vcf[names(gr) %in% tmp$` SNP Name`]
-
-# as dt
-message ("Filtering SNPS")
 dt <- as.data.table( cbind(as.data.frame(ranges (vcf)), as.data.frame(seqnames (vcf))) ) [, .(value, start, names)]
 colnames (dt) <- c("chr", "pos", "SNP_ID")
 
+# Filter Markers
+message ("Filtering SNPS")
+# selct SNPs on the array
+dt <- dt[paste0(chr, pos) %in% tmp[, paste0(Chr, Position)], ]
 # remove SNPS that map on the same position
 dt <- dt[!paste(chr, pos) %in% dt[duplicated (dt[, paste(chr, pos)]), paste(chr, pos)], ]
 # remove SNPS with duplicated names
@@ -34,4 +34,4 @@ dt <- dt[!SNP_ID %in% dt[duplicated (SNP_ID), SNP_ID], ]
 message ( "Writing snppos.txt file")
 dt <- dt[, .(SNP_ID, chr, pos)]
 colnames (dt) <- c("SNP Name", "Chr", "Position")
-fwrite(dt, paste0(args [1], "/snopos.txt"), sep = "\t")
+fwrite(dt, paste0(args [1], "/snoppos.txt"), sep = "\t")

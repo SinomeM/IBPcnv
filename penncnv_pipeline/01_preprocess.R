@@ -1,8 +1,6 @@
-# CHANGE THIS if batches should be larger or smaller #
-bs <- 2000
-
 
 args <- commandArgs(trailingOnly=TRUE)
+bs <- args[3]
 
 # read samples list
 slistp <- paste0(args[1], "/samples_list.txt")

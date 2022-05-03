@@ -8,8 +8,7 @@
 # Variables
 wkdir=${1}
 scripts=${2} # the location of IBPcnv repo clone
-s_acc=${3}
-mg=${4}
+mg=${3}
 
 simg="singularity exec ${wkdir}/ibpcnv.simg"
 res=$wkdir/results

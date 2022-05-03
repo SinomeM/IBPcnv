@@ -1,9 +1,9 @@
 #!/bin/bash
 
-#SBATCH --account=ripsych
-#SBATCH --mem=4g
-#SBATCH -c 1
-#SBATCH --time 15:00:00
+###PBS -W group_list=group_here -A account_here
+#PBS -l mem=4g
+#PBS -l nodes=1:ppn=1
+#PBS -l walltime=15:00:00
 
 # Settings
 min_snp=5

@@ -7,6 +7,8 @@
 
 # This script run one time for each batch
 
+cd ${wkdir}/logs #unelegant solution to put PBS output in logs
+
 # Variables
 wkdir=${1}
 scripts=${2}

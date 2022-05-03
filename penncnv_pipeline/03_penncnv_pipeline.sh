@@ -6,6 +6,8 @@ scripts=${2} # the location of IBPcnv repo clone
 batches=${3}
 hg=${4}
 
+cd ${wkdir}/logs #unelegant solution to put PBS output in logs
+
 snpposfile=${wkdir}/snppos.txt
 gcmodel=${wkdir}/gcmodel.txt
 gccont=${wkdir}/${hg}_gc5120bp.txt

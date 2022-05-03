@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH --account=ripsych
+###SBATCH --account=account_here
 #SBATCH --mem=4g
 #SBATCH -c 1
 #SBATCH --time 15:00:00

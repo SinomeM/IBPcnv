@@ -1,9 +1,9 @@
 #!/bin/bash
 
-###SBATCH --account=${3}
-#SBATCH --mem=50g
-#SBATCH -c 2
-#SBATCH --time 12:00:00
+###PBS -W group_list=group_here -A account_here
+#PBS -l mem=50g
+#PBS -l nodes=1:ppn=2
+#PBS -l walltime=12:00:00
 
 # Variables
 wkdir=${1}

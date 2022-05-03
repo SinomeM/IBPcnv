@@ -5,6 +5,8 @@
 #PBS -l nodes=1:ppn=2
 #PBS -l walltime=12:00:00
 
+cd ${wkdir}/logs #unelegant solution to put PBS output in logs
+
 # Variables
 wkdir=${1}
 scripts=${2} # the location of IBPcnv repo clone

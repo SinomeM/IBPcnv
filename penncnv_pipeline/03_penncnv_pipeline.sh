@@ -5,7 +5,6 @@ wkdir=${1}
 scripts=${2} # the location of IBPcnv repo clone
 batches=${3}
 hg=${4}
-s_acc=${5}
 
 snpposfile=${wkdir}/snppos.txt
 gcmodel=${wkdir}/gcmodel.txt
@@ -24,7 +23,7 @@ for wv in {1..${batches}}; do
 
   echo -e "\nLaunching the calling pipeline in batch n${wv}\n"
   # batch number and SLURM account are passed to the script
-  sbatch ${scripts}/penncnv_pipeline/per_wave_pipeline.sh $wkdir $scripts $wv $s_acc
+  sbatch ${scripts}/penncnv_pipeline/per_wave_pipeline.sh $wkdir $scripts $wv
   sleep 2
 
 done

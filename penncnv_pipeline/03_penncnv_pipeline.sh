@@ -23,7 +23,7 @@ for wv in {1..${batches}}; do
 
   echo -e "\nLaunching the calling pipeline in batch n${wv}\n"
   # batch number and SLURM account are passed to the script
-  sbatch ${scripts}/penncnv_pipeline/per_wave_pipeline.sh $wkdir $scripts $wv
+  sbatch ${scripts}/penncnv_pipeline/03_1_per_wave.sh $wkdir $scripts $wv
   sleep 2
 
 done

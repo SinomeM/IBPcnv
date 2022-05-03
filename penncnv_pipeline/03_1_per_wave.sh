@@ -55,7 +55,7 @@ for i in $( seq 1 1 $n_chunks ); do
   fi
   tail $listfile -n+${nt} | head -n 200 > ${wkdir}/listfile/listfile${wv}_${i}.txt
   # launch the sbatch script for this chunk
-  sbatch ${scripts}/penncnv_pipeline/cnv_calling.sh $wkdir $scripts $wv $i $s_acc
+  sbatch ${scripts}/penncnv_pipeline/03_2_cnv_calling.sh $wkdir $scripts $wv $i
   sleep 0.5
 done
 
@@ -64,7 +64,7 @@ sleep 1
 # last batch
 let i++
 tail $listfile -n $last_chunk > ${wkdir}/listfile/listfile${wv}_${i}.txt
-sbatch ${scripts}/penncnv_pipeline/cnv_calling.sh $wkdir $scripts $wv $i $s_acc
+sbatch ${scripts}/penncnv_pipeline/03_2_cnv_calling.sh $wkdir $scripts $wv $i
 
 echo -e "\n Done!\n"
 sleep 2

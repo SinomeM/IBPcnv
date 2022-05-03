@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH --account=${4}
+###SBATCH --account=account_here
 #SBATCH --mem=50g
 #SBATCH -c 2
 #SBATCH --time 12:00:00

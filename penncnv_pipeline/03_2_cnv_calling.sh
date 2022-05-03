@@ -5,6 +5,8 @@
 #PBS -l nodes=1:ppn=1
 #PBS -l walltime=15:00:00
 
+cd ${wkdir}/logs #unelegant solution to put PBS output in logs
+
 # Settings
 min_snp=5
 min_bps=1000

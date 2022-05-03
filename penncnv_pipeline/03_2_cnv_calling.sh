@@ -14,7 +14,6 @@ wkdir=${1}
 scripts=${2}
 wv=${3}
 i=${4}
-s_acc=${5}
 
 snpposfile=${wkdir}/snppos.txt
 gcmodel=${wkdir}/gcmodel.txt

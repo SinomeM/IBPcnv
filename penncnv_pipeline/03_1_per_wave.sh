@@ -4,6 +4,8 @@
 #SBATCH --mem=50g
 #SBATCH -c 2
 #SBATCH --time 12:00:00
+#SBATCH --output=${1}/logs/%j.out
+#SBATCH --error=${1}/logs/%j.err
 
 # This script run one time for each batch
 

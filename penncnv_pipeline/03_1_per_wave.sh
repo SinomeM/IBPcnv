@@ -11,7 +11,6 @@
 wkdir=${1}
 scripts=${2}
 wv=${3}
-s_acc=${4}
 
 snpposfile=${wkdir}/snppos.txt
 

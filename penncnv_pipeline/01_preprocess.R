@@ -1,6 +1,7 @@
 
 args <- commandArgs(trailingOnly=TRUE)
 bs <- args[3]
+tf <- args[4]
 
 # read samples list
 slistp <- paste0(args[1], "/samples_list.txt")
@@ -53,6 +54,8 @@ if ("batch" %in% colnames(slist))
   if (!all(is.integer(slist[, batch])) | is.na(is.integer(slist[, batch])))
     stop("Batch column is in the wrong format!")
 
+slist[, file_path_tabix := paste0(tf, "/", sample_ID, ".tabix")]
+  
 # overwrite samples list and write individual batches files
 fwrite(slist, args[1], sep = "\t")
 

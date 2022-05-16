@@ -20,7 +20,7 @@ if (args[2] == 1) {
 
   # test 100 random files format
   for (f in sample(slist[, file_path], 100)) {
-    if!(file.exists(f))
+    if(!file.exists(f))
       stop(paste0("Intensity file missing! File: ", f))
     # read only the first 20 lines
     tmp <- fread(paste0("head ", f, " -n20"), skip = "Position")

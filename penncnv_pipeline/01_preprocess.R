@@ -10,7 +10,7 @@ slistp <- paste0(args[1], "/samples_list.txt")
 if (!file.exists(slistp)) stop("Samples list file not found")
 
 if (args[2] == 1) {
-  slist <- fread(args[1])
+  slist <- fread(slistp)
   if (!all(c("sample_ID", "file_path") %in% colnames(slist)))
     stop("Wrong columns in samples list file")
 

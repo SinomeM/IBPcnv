@@ -1,4 +1,6 @@
 
+require(data.table)
+
 args <- commandArgs(trailingOnly=TRUE)
 bs <- args[3]
 tf <- args[4]

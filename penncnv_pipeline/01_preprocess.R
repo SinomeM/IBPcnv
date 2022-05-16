@@ -4,7 +4,6 @@ require(data.table)
 args <- commandArgs(trailingOnly=TRUE)
 bs <- args[3]
 tf <- args[4]
-gz <- args[5]
 
 # read samples list
 slistp <- paste0(args[1], "/samples_list.txt")
@@ -26,8 +25,7 @@ if (args[2] == 1) {
     if(!file.exists(f))
       stop(paste0("Intensity file missing! File: ", f))
     # read only the first 20 lines
-    if (gz) tmp <- fread(cmd = paste0("zcat ", f, " | head -n20"), skip = "Name")
-    else tmp <- fread(cmd = paste0("head ", f, " -n20"), skip = "Name")
+    tmp <- fread(cmd = paste0("head ", f, " -n20"), skip = "Name")
     # if some lines are missing they were skipped by fread()
     if (nrow(tmp) < 19)
       stop(paste0("Intensity file in the wrong format. Long header not removed? File: ", f))

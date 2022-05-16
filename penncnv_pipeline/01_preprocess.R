@@ -8,9 +8,9 @@ tf <- args[4]
 # read samples list
 slistp <- paste0(args[1], "/samples_list.txt")
 if (!file.exists(slistp)) stop("Samples list file not found")
+slist <- fread(slistp)
 
 if (args[2] == 1) {
-  slist <- fread(slistp)
   if (!all(c("sample_ID", "file_path") %in% colnames(slist)))
     stop("Wrong columns in samples list file")
 

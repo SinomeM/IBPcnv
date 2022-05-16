@@ -25,7 +25,7 @@ if (args[2] == 1) {
     if(!file.exists(f))
       stop(paste0("Intensity file missing! File: ", f))
     # read only the first 20 lines
-    tmp <- fread(cmd = paste0("head ", f, " -n20"), skip = "Log R Ratio")
+    tmp <- fread(cmd = paste0("head ", f, " -n20"), skip = "Name")
     # if some lines are missing they were skipped by fread()
     if (nrow(tmp) < 19)
       stop(paste0("Intensity file in the wrong format. Long header not removed? File: ", f))

@@ -36,7 +36,7 @@ if (args[2] == 1) {
       if (!all(tmp == tmp[1])) stop(paste0("Multiple samples per intensity file! File: ", f))
       
     # check required columns 
-    if(!c('Chr', 'Position', 'Log R Ratio', 'B Allele Freq', 'Name') %in% colnames(tmp))
+    if(!c('Name', 'Log R Ratio', 'B Allele Freq') %in% colnames(tmp))
       stop("Essential columns are missing.\n Available ones are: ", colnames(tmp))
     }
   }

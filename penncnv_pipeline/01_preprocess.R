@@ -65,7 +65,7 @@ if ("batch" %in% colnames(slist))
 slist[, file_path_tabix := paste0(tf, "/", sample_ID, ".tabix")]
 
 # overwrite samples list and write individual batches files
-fwrite(slist, args[1], sep = "\t")
+fwrite(slist, slistp, sep = "\t")
 
 lf <- paste0(args[1], "/listfile")
 dir.create(lf)

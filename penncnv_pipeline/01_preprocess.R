@@ -40,6 +40,7 @@ if (args[2] == 1) {
     if(!c('Name', 'Log R Ratio', 'B Allele Freq') %in% colnames(tmp))
       stop("Essential columns are missing.\n Available ones are: ", colnames(tmp))
   }
+  message("Intensity files in correct format")
 }
 
 # check if batches are included or create them

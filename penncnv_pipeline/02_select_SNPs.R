@@ -6,23 +6,21 @@ setwd(args[1])
 # only strictly biallelic SNPs, with at least 1 alternate allele count, and only known (no ".")
 if (args[3] == "hg19") {
   if (!file.exists("hg19_snp_list.vcf.gz")) {
-    message("Downloading HRC VCF")
-    system(paste0("bcftools view -m2 -M2 -v snps -c10:minor -k -Ou ftp://ngs.sanger.ac.uk/production/hrc/HRC.r1-1/HRC.r1-1.GRCh37.wgs.mac5.sites.vcf.gz | bcftools filter -i 'AF > ", args[2], "' -Oz > hg19_snp_list.vfc.gz"))
+    message("\nDownloading HRC VCF")
+    system(paste0("bcftools view -m2 -M2 -v snps -c10:minor -k -Ou ftp://ngs.sanger.ac.uk/production/hrc/HRC.r1-1/HRC.r1-1.GRCh37.wgs.mac5.sites.vcf.gz | bcftools filter -i 'AF > ", args[2], "' -Oz > hg19_snp_list.vcf.gz"))
   }
 }
 
-if (!file.exists(paste0(args[3], "_snp_list.vfc.gz.tbi")))
-  system(paste0("tabix ", args[3], "_snp_list.vfc.gz"))
+if (!file.exists(paste0(args[3], "_snp_list.vcf.gz.tbi")))
+  system(paste0("tabix ", args[3], "_snp_list.vcf.gz"))
 
 suppressMessages(suppressWarnings(library(VariantAnnotation,warn.conflicts = F, quietly = T)))
 suppressMessages(suppressWarnings(library(data.table,warn.conflicts = F, quietly = T)))
 
-# create snppos.txt, from the first intensity file
-slist <- fread(paste0(args[1], "/samples_list.txt"))
-tmp <- fread (slist[1, file_path], skip = "Name")[, .(Name, Chr, Position)]
+tmp <- fread("snppos.txt")
 
 # Read VCF
-fl <- (paste0(args[3], "_snp_list.vfc.gz"))
+fl <- (paste0(args[3], "_snp_list.vcf.gz"))
 message ("Loading SNPS info into R")
 vcf <- rowRanges(readVcf(fl, args[3]))
 dt <- as.data.table( cbind(as.data.frame(ranges (vcf)), as.data.frame(seqnames (vcf))) ) [, .(value, start, names)]
@@ -40,7 +38,7 @@ if (args[4]) {
 }
 
 # Write snppos.txt
-message ( "Writing snppos.txt file")
+message ( "Overwriting snppos.txt file")
 dt <- dt[, .(SNP_ID, chr, pos)]
 colnames (dt) <- c("SNP Name", "Chr", "Position")
 fwrite(dt, paste0(args [1], "/snoppos.txt"), sep = "\t")

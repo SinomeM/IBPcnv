@@ -29,16 +29,16 @@ if (args[2] == 1) {
     # if some lines are missing they were skipped by fread()
     if (nrow(tmp) < 19)
       stop(paste0("Intensity file in the wrong format. Long header not removed? File: ", f))
-    
+
     # check is 'Sample ID' column is present, if yes check content
     if ("Sample ID" %in% colnames(tmp)) {
       tmp <- fread(f, select = "Sample ID")[, `Sample ID`]
       if (!all(tmp == tmp[1])) stop(paste0("Multiple samples per intensity file! File: ", f))
     }
-      
-    # check required columns 
+
+    # check required columns
     if(!c('Name', 'Log R Ratio', 'B Allele Freq') %in% colnames(tmp))
-      stop("Essential columns are missing.\n Available ones are: ", colnames(tmp))
+      stop(paste0("Essential columns are missing.\n Available ones are: ", colnames(tmp)))
   }
   message("Intensity files in correct format")
 }

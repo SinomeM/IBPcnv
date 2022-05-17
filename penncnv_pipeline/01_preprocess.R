@@ -40,7 +40,7 @@ if (args[2] == 1) {
     if(!all(c('Name', 'Log R Ratio', 'B Allele Freq') %in% colnames(tmp)))
       stop(paste0("Essential columns are missing.\n Available ones are: ", colnames(tmp)))
   }
-  message("Intensity files in correct format")
+  message("\nIntensity files in correct format!")
 }
 
 # check if batches are included or create them
@@ -71,4 +71,4 @@ dir.create(lf, showWarnings = F)
 for (i in unique(slist[, batch]))
   fwrite(slist[batch == i, .(file_path)], paste0(lf, "/batch", i,".txt"), col.names = F)
 
-message("Step 1 done! ", i, " batches will be used.")
+message("\nStep 1 done! ", i, " batches will be used.")

@@ -19,7 +19,7 @@ suppressMessages(suppressWarnings(library(data.table,warn.conflicts = F, quietly
 
 # create snppos.txt, from the first intensity file
 slist <- fread(paste0(args[1], "/samples_list.txt"))
-tmp <- fread (slist[1, file_path], skip = "Position")[, .(Name, Chr, Position)]
+tmp <- fread (slist[1, file_path], skip = "Name")[, .(Name, Chr, Position)]
 
 # Read VCF
 fl <- (paste0(args[3], "_snp_list.vfc.gz"))

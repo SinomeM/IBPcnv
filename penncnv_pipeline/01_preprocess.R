@@ -37,7 +37,7 @@ if (args[2] == 1) {
     }
 
     # check required columns
-    if(!c('Name', 'Log R Ratio', 'B Allele Freq') %in% colnames(tmp))
+    if(!all(c('Name', 'Log R Ratio', 'B Allele Freq') %in% colnames(tmp)))
       stop(paste0("Essential columns are missing.\n Available ones are: ", colnames(tmp)))
   }
   message("Intensity files in correct format")

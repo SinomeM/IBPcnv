@@ -40,5 +40,5 @@ if (args[4]) {
 # Write snppos.txt
 message ( "Overwriting snppos.txt file")
 dt <- dt[, .(SNP_ID, chr, pos)]
-colnames (dt) <- c("SNP Name", "Chr", "Position")
-fwrite(dt, paste0(args [1], "/snoppos.txt"), sep = "\t")
+colnames (dt) <- c("Name", "Chr", "Position")
+fwrite(dt, paste0(args [1], "/snppos.txt"), sep = "\t")

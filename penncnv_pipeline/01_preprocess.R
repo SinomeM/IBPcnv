@@ -1,5 +1,5 @@
 
-require(data.table)
+require(data.table, quiet = T)
 
 args <- commandArgs(trailingOnly=TRUE)
 bs <- as.integer(args[3])

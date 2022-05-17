@@ -71,6 +71,6 @@ lf <- paste0(args[1], "/listfile")
 dir.create(lf)
 
 for (i in unique(slist[, batch]))
-  fwrite(slist[batch := i, .(file_path)], paste0(lf, "/batch", i,".txt"), col.names = F)
+  fwrite(slist[batch == i, .(file_path)], paste0(lf, "/batch", i,".txt"), col.names = F)
 
 message("Step 1 done! ", i, " batches will be used.")

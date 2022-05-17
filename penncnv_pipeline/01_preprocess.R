@@ -31,7 +31,7 @@ if (args[2] == 1) {
       stop(paste0("Intensity file in the wrong format. Long header not removed? File: ", f))
     
     # check is 'Sample ID' column is present, if yes check content
-    if (`Sample ID` %in% colnames(tmp)) {
+    if ("Sample ID" %in% colnames(tmp)) {
       tmp <- fread(f, select = "Sample ID")[, `Sample ID`]
       if (!all(tmp == tmp[1])) stop(paste0("Multiple samples per intensity file! File: ", f))
     }

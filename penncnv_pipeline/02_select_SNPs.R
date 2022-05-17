@@ -12,7 +12,7 @@ library(VariantAnnotation); library(data.table)
 
 # create snppos.txt, from the first intensity file
 slistp <- paste0 (args[1], "/samples_list.txt")
-tmp <- fread (slistp[1, file_path], skip = "Position")[, .(`SNP Name`, chr, Position)]
+tmp <- fread (slistp[1, file_path], skip = "Position")[, .(Name, Chr, Position)]
 
 # Read VCF
 fl <- ("hg19_snp_list.vfc.gz")

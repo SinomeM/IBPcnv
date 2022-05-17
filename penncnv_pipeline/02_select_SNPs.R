@@ -10,7 +10,8 @@ if (args[3] == "hg19")
 
 system(paste0("tabix ", args[3], "_snp_list.vfc.gz"))
 
-require(VariantAnnotation, quiet = T); require(data.table, quite = T)
+suppressMessages(suppressWarnings(library(VariantAnnotation,warn.conflicts = F, quietly = T)))
+require(data.table, quiet = T)
 
 # create snppos.txt, from the first intensity file
 slist <- fread(paste0(args[1], "/samples_list.txt"))

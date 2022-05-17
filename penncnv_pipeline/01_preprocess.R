@@ -46,13 +46,11 @@ if (args[2] == 1) {
 # check if batches are included or create them
 if (!"batch" %in% colnames(slist)) {
   n <- nrow(slist)
+
+  # divide total sample by approximate size of batch to get number of batches
   nb <- n %/% bs
-
-  # if the last batch would be too small decrease by one number of batches
-  if(n %% bs > 0.75 * bs) nb <- nb - 1
-
-  # because in any case all batches will have same number of samples (max difference is 1)
-  tmp <- rep(1:bs, length.out = n)
+  # shuffle batches
+  tmp <- rep(1:nb, length.out = n)
   batches <- sample(tmp)
 
   slist[, batch := batches]
@@ -68,7 +66,7 @@ slist[, file_path_tabix := paste0(tf, "/", sample_ID, ".tabix")]
 fwrite(slist, slistp, sep = "\t")
 
 lf <- paste0(args[1], "/listfile")
-dir.create(lf)
+dir.create(lf, showWarnings = F)
 
 for (i in unique(slist[, batch]))
   fwrite(slist[batch == i, .(file_path)], paste0(lf, "/batch", i,".txt"), col.names = F)

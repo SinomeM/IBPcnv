@@ -25,10 +25,12 @@ colnames (dt) <- c("chr", "pos", "SNP_ID")
 message ("Filtering SNPS")
 # selct SNPs on the array
 dt <- dt[paste0(chr, pos) %in% tmp[, paste0(Chr, Position)], ]
-# remove SNPS that map on the same position
-dt <- dt[!paste(chr, pos) %in% dt[duplicated (dt[, paste(chr, pos)]), paste(chr, pos)], ]
-# remove SNPS with duplicated names
-dt <- dt[!SNP_ID %in% dt[duplicated (SNP_ID), SNP_ID], ]
+if (args[4]) {
+  # remove SNPS that map on the same position
+  dt <- dt[!paste(chr, pos) %in% dt[duplicated (dt[, paste(chr, pos)]), paste(chr, pos)], ]
+  # remove SNPS with duplicated names
+  dt <- dt[!SNP_ID %in% dt[duplicated (SNP_ID), SNP_ID], ]
+}
 
 # Write snppos.txt
 message ( "Writing snppos.txt file")

@@ -8,7 +8,8 @@ if (args[3] == "hg19")
   if (!file.exists("hg19_snp_list.vcf.gz"))
     system(paste0("bcftools view -m2 -M2 -v snps -c10:minor -k -Ou ftp://ngs.sanger.ac.uk/production/hrc/HRC.r1-1/HRC.r1-1.GRCh37.wgs.mac5.sites.vcf.gz | bcftools filter -i 'AF > ", args[2], "' -Oz > hg19_snp_list.vfc.gz"))
 
-system(paste0("tabix ", args[3], "_snp_list.vfc.gz"))
+if (!file.exists(args[3], "_snp_list.vfc.gz.tbi"))
+  system(paste0("tabix ", args[3], "_snp_list.vfc.gz"))
 
 suppressMessages(suppressWarnings(library(VariantAnnotation,warn.conflicts = F, quietly = T)))
 require(data.table, quiet = T)

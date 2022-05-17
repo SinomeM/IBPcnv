@@ -5,17 +5,16 @@ setwd(args[1])
 # Downloads SNPs list from HRC
 # only strictly biallelic SNPs, with at least 1 alternate allele count, and only known (no ".")
 if (args[3] == "hg19")
-  system(paste0("bcftools view -m2 -M2 -v snps -c10:minor -k -Ou ftp://ngs.sanger.ac.uk/production/hrc/HRC.r1-1/HRC.r1-1.GRCh37.wgs.mac5.sites.vcf.gz | bcftools filter -i 'AF > ", args[2], "' -Oz > hg19_snp_list.vfc.gz"))
+  if (!file.exists("hg19_snp_list.vcf.gz"))
+    system(paste0("bcftools view -m2 -M2 -v snps -c10:minor -k -Ou ftp://ngs.sanger.ac.uk/production/hrc/HRC.r1-1/HRC.r1-1.GRCh37.wgs.mac5.sites.vcf.gz | bcftools filter -i 'AF > ", args[2], "' -Oz > hg19_snp_list.vfc.gz"))
 
 system(paste0("tabix ", args[3], "_snp_list.vfc.gz"))
 
-
-
-library(VariantAnnotation); library(data.table)
+require(VariantAnnotation, quiet = T); require(data.table, quite = T)
 
 # create snppos.txt, from the first intensity file
-slistp <- paste0 (args[1], "/samples_list.txt")
-tmp <- fread (slistp[1, file_path], skip = "Position")[, .(Name, Chr, Position)]
+slist <- fread(paste0(args[1], "/samples_list.txt"))
+tmp <- fread (slist[1, file_path], skip = "Position")[, .(Name, Chr, Position)]
 
 # Read VCF
 fl <- (paste0(args[3], "_snp_list.vfc.gz"))

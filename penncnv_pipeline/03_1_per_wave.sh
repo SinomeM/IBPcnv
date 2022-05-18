@@ -32,7 +32,12 @@ echo -e "\nComputing PFB for batch ${wv}"
 
 mkdir -p $wkdir/pfb
 
-$simg compile_pfb.pl -snpposfile $snpposfile -output $pfb -listfile $listfile
+fls=""
+for f in $( cat $listfile ); do
+  fls="$fls $f"
+done
+
+$simg compile_pfb.pl -snpposfile $snpposfile -output $pfb $fls
 
 echo -e "\n Done!\n"
 sleep 2

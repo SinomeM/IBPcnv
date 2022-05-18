@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ###SBATCH --account=account_here
-#SBATCH --mem=4g
+#SBATCH --mem=5g
 #SBATCH -c 1
 #SBATCH --time 15:00:00
 #SBATCH --output=logs/%x_%j.out

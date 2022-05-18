@@ -27,8 +27,9 @@ hmm=${scripts}/lib/hhall.hmm
 output=${wkdir}/calling_res/
 log=${wkdir}/logs
 
+cd $wkdir
+
 mkdir -p $output
-mkdir -p $log
 
 # Autosomes
 $simg detect_cnv.pl \

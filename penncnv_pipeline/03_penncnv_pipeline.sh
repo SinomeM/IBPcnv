@@ -8,9 +8,11 @@ hg=${4}
 
 snpposfile=${wkdir}/snppos.txt
 gcmodel=${wkdir}/gcmodel.txt
-gccont=${script}/gcfile/${hg}gc.txt
+gccont=${scripts}/gcfile/${hg}gc.txt
 
 simg="singularity exec ${wkdir}/ibpcnv.simg"
+
+cd $wkdir
 
 # GC model #
 echo -e "\nCreating GC content model"
@@ -21,7 +23,7 @@ srun -c2 --mem=50g --time 00:30:00 \
   $simg cal_gc_snp.pl $gccont $snpposfile --output $gcmodel
 
 # Main loop #
-for wv in {1..${batches}}; do
+for wv in $( seq 1 $batches ); do
 
   echo -e "\nLaunching the calling pipeline in batch n${wv}\n"
   # batch number and SLURM account are passed to the script

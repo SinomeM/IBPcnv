@@ -19,8 +19,10 @@ snpposfile=${wkdir}/snppos.txt
 simg="singularity exec ${wkdir}/ibpcnv.simg"
 
 # listfiles are already created by the preprocessing script
-listfile=$wkdir/listfile/batch${3}.txt
+listfile=${wkdir}/listfile/batch${3}.txt
 pfb=${wkdir}/pfb/batch${wv}.pfb
+
+cd $wkdir
 
 # intensity files must be already in the correct format
 
@@ -47,7 +49,7 @@ last_chunk=$(( $n_samples%200 ))
 echo -e "\n Launching CNV calling jobs in batch ${wv}."
 
 # call a sbatch script
-for i in $( seq 1 1 $n_chunks ); do
+for i in $( seq 1 $n_chunks ); do
   # extract chunks of 200 samples
   nn=$(( $i-1 ))
   nt=$(( 200*$nn))

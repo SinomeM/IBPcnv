@@ -8,14 +8,16 @@ hg=${4}
 
 snpposfile=${wkdir}/snppos.txt
 gcmodel=${wkdir}/gcmodel.txt
-gccont=${wkdir}/${hg}_gc5120bp.txt
+gccont=${script}/gcfile/${hg}gc.txt
 
 simg="singularity exec ${wkdir}/ibpcnv.simg"
 
 # GC model #
 echo -e "\nCreating GC content model"
 
-srun --account=$s_acc -c2 --mem=50g --time 00:30:00 \
+# srun --account=$s_acc -c2 --mem=50g --time 00:30:00 \
+#   $simg cal_gc_snp.pl $gccont $snpposfile --output $gcmodel
+srun -c2 --mem=50g --time 00:30:00 \
   $simg cal_gc_snp.pl $gccont $snpposfile --output $gcmodel
 
 # Main loop #

@@ -4,8 +4,8 @@
 #SBATCH --mem=4g
 #SBATCH -c 1
 #SBATCH --time 15:00:00
-#SBATCH --output=logs/%x.out
-#SBATCH --error=logs/%x.err
+#SBATCH --output=logs/%x_%j.out
+#SBATCH --error=logs/%x%j.err
 
 # Settings
 min_snp=5

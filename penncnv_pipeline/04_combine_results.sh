@@ -1,11 +1,11 @@
 #!/bin/bash
 
-###SBATCH --account=${3}
-#SBATCH --mem=50g
-#SBATCH -c 2
-#SBATCH --time 12:00:00
-#SBATCH --output=${1}/logs/%j.out
-#SBATCH --error=${1}/logs/%j.err
+###SBATCH --account=account_name_here
+#SBATCH --mem=20g
+#SBATCH -c 1
+#SBATCH --time 10:00:00
+#SBATCH --output=logs/%j.out
+#SBATCH --error=logs/%j.err
 
 # Variables
 wkdir=${1}

@@ -17,6 +17,7 @@ cd $wkdir
 # GC model #
 echo -e "\nCreating GC content model"
 
+# uncomment and edit this version of the command to use a SLURM account
 # srun --account=$s_acc -c2 --mem=50g --time 00:30:00 \
 #   $simg cal_gc_snp.pl $gccont $snpposfile --output $gcmodel
 srun -c1 --mem=10g --time 00:30:00 \

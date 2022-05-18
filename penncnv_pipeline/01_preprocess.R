@@ -67,6 +67,7 @@ fwrite(slist, slistp, sep = "\t")
 
 lf <- paste0(args[1], "/listfile")
 dir.create(lf, showWarnings = F)
+dir.create(paste0(args[1], "/logs"), showWarnings = F)
 
 for (i in unique(slist[, batch]))
   fwrite(slist[batch == i, .(file_path)], paste0(lf, "/batch", i,".txt"), col.names = F)

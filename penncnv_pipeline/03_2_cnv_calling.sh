@@ -25,11 +25,12 @@ simg="singularity exec ${wkdir}/ibpcnv.simg"
 hmm=${scripts}/lib/hhall.hmm
 
 output=${wkdir}/calling_res/
-log=${wkdir}/logs
+pennlog=${wkdir}/pennlogs
 
 cd $wkdir
 
 mkdir -p $output
+mkdir -p $pennlog
 
 # Autosomes
 $simg detect_cnv.pl \
@@ -41,6 +42,6 @@ $simg detect_cnv.pl \
   --minlength ${min_bps} \
   --confidence \
   --output $output/wave${wv}_${i}.rawcnv \
-  --logfile ${log}/wave${wv}_${i}_autosome.log \
+  --logfile ${pennlog}/wave${wv}_${i}_autosome.log \
   --directory ${raw}/ \
   --listfile ${wkdir}/listfile/listfile${wv}_${i}.txt

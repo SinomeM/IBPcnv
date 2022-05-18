@@ -81,4 +81,7 @@ for i in $( ls ${wkdir}/clean_res | grep -v chrX ); do
 
 done
 
+# remove the ':' after samples name
+sed -i 's/:\ /\ /g' ${res}/autosome.qc
 
+echo -e "\nAll done!"

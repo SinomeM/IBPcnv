@@ -3,7 +3,7 @@
 ###SBATCH --account=account_here
 #SBATCH --mem=10g
 #SBATCH -c 1
-#SBATCH --time 12:00:00
+#SBATCH --time 10:00:00
 #SBATCH --output=logs/%x_%j.out
 #SBATCH --error=logs/%x_%j.err
 

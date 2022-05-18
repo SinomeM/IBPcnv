@@ -19,6 +19,7 @@ i=${4}
 
 snpposfile=${wkdir}/snppos.txt
 gcmodel=${wkdir}/gcmodel.txt
+pfbfile=${wkdir}/pfb/batch${wv}.pfb
 
 simg="singularity exec ${wkdir}/ibpcnv.simg"
 
@@ -43,5 +44,4 @@ $simg detect_cnv.pl \
   --confidence \
   --output $output/wave${wv}_${i}.rawcnv \
   --logfile ${pennlog}/wave${wv}_${i}_autosome.log \
-  --directory ${raw}/ \
   --listfile ${wkdir}/listfile/listfile${wv}_${i}.txt

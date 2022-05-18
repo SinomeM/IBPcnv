@@ -4,8 +4,8 @@
 #SBATCH --mem=20g
 #SBATCH -c 1
 #SBATCH --time 10:00:00
-#SBATCH --output=logs/%j.out
-#SBATCH --error=logs/%j.err
+#SBATCH --output=logs/%x_%j.out
+#SBATCH --error=logs/%x_%j.err
 
 # Variables
 wkdir=${1}
@@ -19,7 +19,6 @@ res=$wkdir/results
 
 echo -e "\nSoft CNV stitching and filtering using PennCNV clean_cnv.pl and filter_cnv.pl"
 mkdir -p $wkdir/clean_res
-mkdir -p $wkdir/filtered_res
 
 for i in $( ls ${wkdir}/calling_res ); do
 
@@ -36,11 +35,11 @@ mkdir -p $res
 # rm ${res}/autosome.qc
 touch ${res}/autosome.qc
 
-for i in $( ls ${wkdir}/logs | grep autosome ); do
+for i in $( ls ${wkdir}/pennlogs | grep autosome ); do
 
   wv=$( echo $i | sed -E 's|wave||' | sed -E 's|_\d*\w*.log||' )
 
-  cat ${wkdir}/logs/${i} | grep 'quality summary' | \
+  cat ${wkdir}/pennlogs/${i} | grep 'quality summary' | \
     awk '{print $5,$6,$7,$8,$9,$10,$11,$12,$13,$14}' | \
     sed 's/.split://g' | sed 's/=/ /g' | \
     awk '{print $1,$3,$5,$7,$9,$11,$13,$15,$17,$19,$21}' | \
@@ -50,7 +49,7 @@ for i in $( ls ${wkdir}/logs | grep autosome ); do
 done
 
 # Add header
-cat ${wkdir}/logs/${i} | grep 'quality summary' | \
+cat ${wkdir}/pennlogs/${i} | grep 'quality summary' | \
   awk '{print $5,$6,$7,$8,$9,$10,$11,$12,$13,$14}' | \
   sed 's/.split://g' | sed 's/=/ /g' | \
   awk '{print "sample_ID",$2,$4,$6,$8,$10,$12,$14,$16,$18,$20,"batch"}' | \
@@ -69,11 +68,11 @@ echo -e "\nCombining CNV calls in Autosomes"
 
 echo "chr start stop sample_ID numsnp length type conf batch" > ${res}/autosome.cnv
 
-for i in $( ls ${wkdir}/filtered_res | grep -v chrX ); do
+for i in $( ls ${wkdir}/clean_res | grep -v chrX ); do
 
   wv=$( echo $i | sed -E 's|wave||' | sed -E 's|_\d*\w*.rawcnv||' )
 
-  cat ${wkdir}/filtered_res/$i | awk '{print$1,$2,$3,$4,$5,$8}' | \
+  cat ${wkdir}/clean_res/$i | awk '{print$1,$2,$3,$4,$5,$8}' | \
     sed 's/:/ /g' | sed 's/-/ /g' |  sed 's/,//g' | \
     sed 's/numsnp=//g' | sed 's/length=//g' | sed 's/conf=//g' | \
     sed 's/.split//g' | sed 's/=/ /g' | awk '{print$1,$2,$3,$8,$4,$5,$7,$9}' | \

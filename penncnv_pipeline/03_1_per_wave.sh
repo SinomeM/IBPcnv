@@ -14,7 +14,7 @@ wkdir=${1}
 scripts=${2}
 wv=${3}
 
-snpposfile=${wkdir}/snppos.txt
+snpposfile=${wkdir}/snppos_filtered.txt
 
 simg="singularity exec ${wkdir}/ibpcnv.simg"
 

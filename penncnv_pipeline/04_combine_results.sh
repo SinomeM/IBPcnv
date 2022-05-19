@@ -22,7 +22,7 @@ mkdir -p $wkdir/clean_res
 
 for i in $( ls ${wkdir}/calling_res ); do
 
-  $simg clean_cnv.pl --fraction $mg --bp --signalfile $wkdir/snppos.txt combineseg ${wkdir}/calling_res/$i > ${wkdir}/clean_res/$i
+  $simg clean_cnv.pl --fraction $mg --bp --signalfile $wkdir/snppos_filtered.txt combineseg ${wkdir}/calling_res/$i > ${wkdir}/clean_res/$i
 
 done
 

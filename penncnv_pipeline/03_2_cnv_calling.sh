@@ -17,7 +17,7 @@ scripts=${2}
 wv=${3}
 i=${4}
 
-snpposfile=${wkdir}/snppos.txt
+snpposfile=${wkdir}/snppos_filtered.txt
 gcmodel=${wkdir}/gcmodel.txt
 pfbfile=${wkdir}/pfb/batch${wv}.pfb
 

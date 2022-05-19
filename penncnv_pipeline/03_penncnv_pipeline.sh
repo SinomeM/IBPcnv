@@ -6,7 +6,7 @@ scripts=${2} # the location of IBPcnv repo clone
 batches=${3}
 hg=${4}
 
-snpposfile=${wkdir}/snppos.txt
+snpposfile=${wkdir}/snppos_filtered.txt
 gcmodel=${wkdir}/gcmodel.txt
 gccont=${scripts}/gcfile/${hg}gc.txt
 

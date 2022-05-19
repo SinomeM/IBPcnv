@@ -40,7 +40,6 @@ if (args[4]) {
 else message("Skipping duplicated SNPs filtering")
 
 # Write snppos.txt
-message ( "Overwriting snppos.txt file")
 dt <- dt[, .(SNP_ID, chr, pos)]
 colnames (dt) <- c("Name", "Chr", "Position")
-fwrite(dt, paste0(args [1], "/snppos.txt"), sep = "\t")
+fwrite(dt, paste0(args [1], "/snppos_filtered.txt"), sep = "\t")

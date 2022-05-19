@@ -2,8 +2,8 @@
 wkdir=$1
 ibpcnv=$2
 
-$snp=${wkdir}/snppos.txt
-$samps=${wkdir}/samples_list.txt
+snp=${wkdir}/snppos.txt
+samps=${wkdir}/samples_list.txt
 
 LANG=C
 

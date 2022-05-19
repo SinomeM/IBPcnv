@@ -20,7 +20,7 @@ tail -n +2 $in.adjusted | cut -f 1,2 | sort -f -k1 -t '	' > ${in}.adjusted2
 tail -n +2 $in | sort -f -k1 -t '	' > ${in}.sorted
 join -i -t '	' -1 1 -2 1 $snpsort ${in}.sorted > ${in}.joined
 # should be 'Name' 'Chr' 'Position' 'LRR' 'BAF' 'adjLRR'
-join -i -t '	' -1 1 -2 1 ${in}.sorted ${in}.adjusted2 > ${in}.joined2
+join -i -t '	' -1 1 -2 1 ${in}.joined ${in}.adjusted2 > ${in}.joined2
 
 rm ${in}.adjusted
 rm ${in}.adjusted2

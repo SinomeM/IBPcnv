@@ -60,7 +60,7 @@ if ("batch" %in% colnames(slist))
   if (!all(is.integer(slist[, batch])) | is.na(is.integer(slist[, batch])))
     stop("Batch column is in the wrong format!")
 
-slist[, file_path_tabix := paste0(tf, "/", sample_ID, ".tabix")]
+slist[, file_path_tabix := paste0(tf, "/", sample_ID, ".tabix.gz")]
 
 # overwrite samples list and write individual batches files
 fwrite(slist, slistp, sep = "\t")

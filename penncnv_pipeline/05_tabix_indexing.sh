@@ -26,17 +26,16 @@ tail -n +2 $in | sort -f -k1 -t '	' > ${in}.sorted
 # join on 'Name' to get 'Chr' and 'Position'
 join -i -t '	' -1 1 -2 1 $snpsort ${in}.sorted > ${in}.joined
 
-# should be 'Name' 'Chr' 'Position' 'LRR' 'BAF' 'adjLRR'
+# 'Chr' 'Position' 'LRR' 'BAF' 'adjLRR'
 # also change 'X' to 23, 'Y' to 24 and 'XY' to 25
-# modify the last print statement if tabix don't need 'Name', or to reorder the columns
 join -i -t '	' -1 1 -2 1 ${in}.joined ${in}.adjusted2 | \
-  awk '{gsub("X","23",$2);gsub("Y", "24", $2);gsub("XY", 25, $2);print}'  > ${in}.joined2
+  awk '{gsub("X","23",$2);gsub("Y", "24", $2);gsub("XY", 25, $2);print $2, $3, $4, $5}'  > ${in}.joined2
 
 # gzip
 bgzip ${in}.joined2 && mv ${in}.joined2.gz ${out}
 
 #tabix indexing
-# singularity exec ${wkdir}/ibpcnv.simg tabix -f -p bed ${in}.joined2
+singularity exec ${wkdir}/ibpcnv.simg tabix -f -p bed ${out}
 
 
 # delete temp files

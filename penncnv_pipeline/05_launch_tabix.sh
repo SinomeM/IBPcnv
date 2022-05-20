@@ -13,6 +13,6 @@ for i in $( seq 2 $( wc -l $samps | cut -d' ' -f1 ) ); do
 
   in=$( sed -n "$i"p $samps | cut -f2 )
   out=$( sed -n "$i"p $samps | cut -f4 )
-  sbatch $ibp/penncnvpipeline/05_1_tabix_indexing.sh $in $out $wkdir $ibpcnv
+  sbatch $ibpcnv/penncnvpipeline/05_1_tabix_indexing.sh $in $out $wkdir $ibpcnv
 
 done

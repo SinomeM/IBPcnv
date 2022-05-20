@@ -44,4 +44,3 @@ rm ${in}.adjusted
 rm ${in}.adjusted2
 rm ${in}.sorted
 rm ${in}.joined
-rm ${in}.joined2

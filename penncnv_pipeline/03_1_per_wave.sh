@@ -68,7 +68,7 @@ sleep 1
 # last batch
 let i++
 tail $listfile -n $last_chunk > ${wkdir}/listfile/listfile${wv}_${i}.txt
-sbatch ${scripts}/penncnv_pipeline/03_2_cnv_calling.sh $wkdir $scripts $wv $i
+qsub ${scripts}/penncnv_pipeline/03_2_cnv_calling.sh $wkdir $scripts $wv $i
 
 echo -e "\n Done!\n"
 sleep 2

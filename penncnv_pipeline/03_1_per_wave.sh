@@ -59,7 +59,7 @@ for i in $( seq 1 $n_chunks ); do
   fi
   tail $listfile -n+${nt} | head -n 200 > ${wkdir}/listfile/listfile${wv}_${i}.txt
   # launch the sbatch script for this chunk
-  sbatch ${scripts}/penncnv_pipeline/03_2_cnv_calling.sh $wkdir $scripts $wv $i
+  qsub ${scripts}/penncnv_pipeline/03_2_cnv_calling.sh $wkdir $scripts $wv $i
   sleep 0.5
 done
 

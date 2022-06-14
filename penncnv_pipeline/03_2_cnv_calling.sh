@@ -1,11 +1,11 @@
 #!/bin/bash
 
-###SBATCH --account=account_here
-#SBATCH --mem=5g
-#SBATCH -c 1
-#SBATCH --time 15:00:00
-#SBATCH --output=logs/%x_%j.out
-#SBATCH --error=logs/%x%j.err
+###PBS -W group_list=group_here -A account_here
+#PBS -l mem=4g
+#PBS -l nodes=1:ppn=1
+#PBS -l walltime=15:00:00
+
+cd ${wkdir}/logs #unelegant solution to put PBS output in logs
 
 # Settings
 min_snp=5

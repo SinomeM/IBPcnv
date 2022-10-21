@@ -36,8 +36,7 @@ if (args[4]) {
   dt <- dt[!paste(chr, pos) %in% dt[duplicated (dt[, paste(chr, pos)]), paste(chr, pos)], ]
   # remove SNPS with duplicated names
   dt <- dt[!SNP_ID %in% dt[duplicated (SNP_ID), SNP_ID], ]
-}
-else message("Skipping duplicated SNPs filtering")
+} else message("Skipping duplicated SNPs filtering")
 
 # Write snppos.txt
 dt <- dt[, .(SNP_ID, chr, pos)]

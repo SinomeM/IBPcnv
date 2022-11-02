@@ -12,6 +12,10 @@ out=${2}
 wkdir=$3
 snpsort=${wkdir}/snppos.txt.sorted
 
+tmp=$(echo $out | sed 's/\.tabix.\.gz/\.tmp/')
+cp $in $tmp
+in=$tmp
+
 LANG=C
 
 # GC adjustment, will produce $in.adjusted
@@ -33,7 +37,8 @@ join -i -t '	' -1 1 -2 1 ${in}.joined ${in}.adjusted2 | \
   sort -nk 1 -nk 2 > ${in}.joined2
 
 # gzip
-bgzip ${in}.joined2 && mv ${in}.joined2.gz ${out}
+singularity exec ${wkdir}/ibpcnv.simgbgzip ${in}.joined2 
+mv ${in}.joined2.gz ${out}
 
 #tabix indexing
 singularity exec ${wkdir}/ibpcnv.simg tabix -f -p bed ${out}

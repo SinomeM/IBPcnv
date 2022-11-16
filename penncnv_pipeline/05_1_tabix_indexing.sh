@@ -37,7 +37,7 @@ join -i -t '	' -1 1 -2 1 ${in}.joined ${in}.adjusted2 | \
   sort -nk 1 -nk 2 > ${in}.joined2
 
 # gzip
-singularity exec ${wkdir}/ibpcnv.simgbgzip ${in}.joined2 
+singularity exec ${wkdir}/ibpcnv.simg bgzip ${in}.joined2 
 mv ${in}.joined2.gz ${out}
 
 #tabix indexing

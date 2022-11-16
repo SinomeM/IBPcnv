@@ -15,7 +15,8 @@ echo "Submitting jobs"
 
 for i in $( seq 2 $( wc -l $samps | cut -d' ' -f1 ) ); do
 
-  echo $i
+  let n=$i-1
+  echo $n
   in=$( sed -n "$i"p $samps | cut -f2 )
   out=$( sed -n "$i"p $samps | cut -f4 )
   sbatch $ibpcnv/penncnv_pipeline/05_1_tabix_indexing.sh $in $out $wkdir $ibpcnv

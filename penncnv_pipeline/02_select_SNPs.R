@@ -18,6 +18,8 @@ suppressMessages(suppressWarnings(library(VariantAnnotation,warn.conflicts = F, 
 suppressMessages(suppressWarnings(library(data.table,warn.conflicts = F, quietly = T)))
 
 tmp <- fread("snppos.txt")
+# if there are more columns, drop them for later
+if (length(colnames(tmp)) > 3) fwrite(tmp[, .(Name, Chr, Postion)], "snppos.txt", sep = "\t")
 
 # Read VCF
 fl <- (paste0(args[3], "_snp_list.vcf.gz"))

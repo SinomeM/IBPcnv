@@ -22,6 +22,7 @@ LANG=C
 singularity exec ${wkdir}/ibpcnv.simg genomic_wave.pl -adjust --gcmodelfile $wkdir/gcmodel.txt $in
 
 # sort adjusted on 'Name'
+# The `cut` command needs to be changed depending on the intensity files format, it may need to be `cut -f 1,2`
 tail -n +2 $in.adjusted | cut -f 1,5 | sort -f -k1 -t '	' > ${in}.adjusted2
 
 # sort unadjusted on 'Name'
